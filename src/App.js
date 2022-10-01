@@ -1,31 +1,30 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function App() {
-
   const baseUrl = "http://localhost:8080";
 
-  const [ data, setData ] = useState('');
+  const [data, setData] = useState("");
 
   useEffect(() => {
     putSpringData();
-  },[])
+  }, []);
 
   async function putSpringData() {
     await axios
-    .get(baseUrl + "/")
-    .then((res)=>{
+      .get(baseUrl + "/")
+      .then((res) => {
         console.log(res.data);
         setData(res.data);
-    })
-    .catch((err)=>{
+      })
+      .catch((err) => {
         console.log(err);
-    })
+      });
   }
 
   return (
-    <div> 
-      <h1>Hello</h1>
+    <div>
+      <h1>Hello!</h1>
       <h2>{data}</h2>
     </div>
   );
