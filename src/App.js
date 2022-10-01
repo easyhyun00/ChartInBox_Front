@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+
+  const baseUrl = "http://localhost:8080";
+
+  const [ data, setData ] = useState('');
+
+  useEffect(() => {
+    putSpringData();
+  },[])
+
+  async function putSpringData() {
+    await axios
+    .get(baseUrl + "/")
+    .then((res)=>{
+        console.log(res.data);
+        setData(res.data);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div> 
+      <h1>Hello</h1>
+      <h2>{data}</h2>
     </div>
   );
 }
